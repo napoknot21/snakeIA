@@ -5,6 +5,7 @@ from collections import namedtuple
 
 pygame.init()
 font = pygame.font.Font('arial.ttf', 25)
+
 class Direction (Enum) :
     RIGHT = 1
     LEFT = 2
@@ -25,6 +26,7 @@ SPEED = 20
 
 class SnakeGame:
 
+    #Constructor for Snake
     def __init__(self, w=640, h=480) :
         self.w = w
         self.h = h
@@ -47,7 +49,8 @@ class SnakeGame:
         self.food = None
         self._place_food()
 
-
+    
+    #Place a new food in random place
     def _place_food (self) :
         x = random.randint(0, (self.w - BLOCK_SIZE)//BLOCK_SIZE)*BLOCK_SIZE
         y = random.randint(0, (self.h - BLOCK_SIZE)//BLOCK_SIZE)*BLOCK_SIZE
@@ -56,6 +59,7 @@ class SnakeGame:
             self._place_food()
     
 
+    #Get input events and modify direction, game state, and snake state
     def play_step (self) :
         #First, we need to collect the user input
         for event in pygame.event.get () :
@@ -98,9 +102,10 @@ class SnakeGame:
         #We return game over and score
         return game_over, self.score
 
-
+    
+    #check if the snake heats hits boundary or itsself
     def _is_collision (self) :
-        #we check if the snake head hits boudary
+        #we check if it hits boudary
         if self.head.x > (self.w - BLOCK_SIZE) or self.head.x < 0 or self.head.y > (self.h - BLOCK_SIZE) or self.head.y < 0 :
             return True
         #Check if the snake head hits itself
@@ -109,11 +114,12 @@ class SnakeGame:
         return False
 
 
+    #Update ui for snake
     def _update_ui (self) :
         self.display.fill(BLACK)
         for pt in self.snake :
             pygame.draw.rect(self.display, BLUE1, pygame.Rect(pt.x, pt.y, BLOCK_SIZE, BLOCK_SIZE))
-            pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x + 4, py.y + 4, 12, 12))
+            pygame.draw.rect(self.display, BLUE2, pygame.Rect(pt.x + 4, pt.y + 4, 12, 12))
 
         pygame.draw.rect(self.display, RED, pygame.Rect(self.food.x, self.food.y, BLOCK_SIZE, BLOCK_SIZE))
 
@@ -121,7 +127,8 @@ class SnakeGame:
         self.display.blit(text, [0, 0])
         pygame.display.flip()
 
-
+    
+    #change movement depending de (new) direction
     def _move (self, direction) :
         x = self.head.x
         y = self.head.y

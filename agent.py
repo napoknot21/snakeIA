@@ -13,11 +13,15 @@ LR = 0.001
 class Agent :
 
     def __init__ (self) :
-        pass
+        self.n_games = 0
+        self.epsilon = 0 #randomness
+        self.gama = 0 #discount rate
+        self.memory = deque(max_len=MAX_MEMORY) #popleft()
+        # TODO model, trainer
 
     
     def get_state (self, game) :
-        pass
+        
 
     
     def remember (self, state, action, reward, next_state, done) :
@@ -28,7 +32,7 @@ class Agent :
         pass
 
 
-    def train_short_memory (self) :
+    def train_short_memory (self, state, action, reward, next_state, done) :
         pass
 
 
@@ -37,7 +41,40 @@ class Agent :
 
 
 def train () :
-    pass
+    plot_scores = []
+    plot_mean_score = []
+    total_score = 0
+    record = 0
+    agent = Agent()
+    game = SnakeGameAI()
+    while True :
+        #get old state
+        state_old = agent.get_state(game)
+
+        #get move 
+        final_move = agent.get_action(state_old)
+
+        #perform move and get new state 
+        reward, done, score = game.play_step(final_move)
+        state_new = agent.get_state(game)
+
+        #train the short memory
+        agent.train_short_memory(state_old, final_move, reward, state_new, done)
+
+        #we have to remember this
+        agent.rember(state_old, final_move, reward, state_new, done)
+
+        if done :
+            #train the long memory (experience) and show results
+            game.reset()
+            agent.n_games += 1
+            agent.train_long_memory()
+
+            if score > record :
+                record = score
+                #TODO agent.model.save
+
+            print('Game: ', agent.n_games, 'Score: ', score, 'Record: ', record)
 
 
 if __name__ == '__main__' :

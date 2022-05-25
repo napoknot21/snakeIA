@@ -41,7 +41,7 @@ Then, We install the rest of libraries
 ```
 pip3 install torch torchvision matplotlib
 ```
-## Clone the repository
+## Snake Game AI
 First, we have to download the repo by
 ```
 git clone https://github.com/napoknot21/snakeIA.git
@@ -57,5 +57,12 @@ Finally, we run the ```agent.py``` file and enjoy the show !
 ```
 python3 agent.py
 ```
+
+## Game
+If you only want to get fun and game to snakegame, well there's a file for that ! so run
+```
+python3 snake_game.py
+```
+
 
 Made by Napoknot21 (C. M-A)

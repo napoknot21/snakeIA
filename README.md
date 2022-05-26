@@ -6,16 +6,19 @@ I incorporate an IA who learn how to game snake and get better creating a strate
 
 ## Prerequisites
 
-It's imperative to have ```python3```.
+It's imperative to have ```python3```. Update your python version [here](https://www.python.org/downloads/)
 
 We need to install some external libraries like ```pygame```, ```pytorch``` for the game. So, depending your operanting system, there are different ways to install them
 
 ### Windows 
 Open a cmd, and enter the following command
 ```
-pip install pygame
+pip3 install pygame ipython matplotlib
 ```
 For ```pyTorch```, you can download it from the offical web site [here](https://pytorch.org/).
+```
+pip3 install torch torchvision
+```
 
 ### Mac
 Open a terminal and do the following command **in case you DON'T have pip** 

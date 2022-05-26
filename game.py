@@ -23,7 +23,7 @@ BLUE2 = (0, 100, 255)
 BLACK = (0, 0, 0)
 
 BLOCK_SIZE = 20
-SPEED = 15
+SPEED = 20
 
 class SnakeGameAI:
 
@@ -35,6 +35,7 @@ class SnakeGameAI:
         self.display = pygame.display.set_mode((self.w, self.h))
         pygame.display.set_caption('Snake')
         self.clock = pygame.time.Clock()
+        self.reset()
 
 
     #reset all game stats (for the IA training)
@@ -79,7 +80,7 @@ class SnakeGameAI:
         #We have to check if the snake is still alive (game over or not)
         reward = 0 #if the snake eat food => +10; if snake dies (game over) => -10; else => 0
         game_over = False
-        if self._is_collision () or self.frame_iteration > 100*len(self.snake) :
+        if self.is_collision () or self.frame_iteration > 100*len(self.snake) :
             game_over = True
             reward = -10 #if the snake eat food => +10; if snake dies (game over) => -10; else => 0
             return reward, game_over, self.score
@@ -101,7 +102,7 @@ class SnakeGameAI:
 
     
     #check if the snake heats hits boundary or itsself
-    def _is_collision (self, pt=None) :
+    def is_collision (self, pt=None) :
         if pt is None : pt = self.head
         #we check if it hits boudary
         if pt.x > (self.w - BLOCK_SIZE) or pt.x < 0 or pt.y > (self.h - BLOCK_SIZE) or pt.y < 0 :

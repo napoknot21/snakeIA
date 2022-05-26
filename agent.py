@@ -18,9 +18,9 @@ class Agent :
         self.n_games = 0
         self.epsilon = 0 #randomness
         self.gamma = 0.9 #discount rate
-        self.memory = deque(max_len=MAX_MEMORY) #popleft()
-        self.mode = Linear_QNet(11, 256, 3) #11 inputs and 3 outputs
-        self.traine = QTrainer(self.model, lr=LR, gamma=self.gamma)
+        self.memory = deque(maxlen=MAX_MEMORY) #popleft()
+        self.model = Linear_QNet(11, 256, 3) #11 inputs and 3 outputs
+        self.trainer = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
     
     def get_state (self, game) :
@@ -78,12 +78,12 @@ class Agent :
 
 
     def train_long_memory (self) :
-        if len(self.memory) > BATCH_SIZE :
-            mini_sample = random.sample(self.memory, BATCH_SIZE) #list of tuples
-        else :
-            mini_simple = self.memory
+        if len(self.memory) > BATCH_SIZE:
+            mini_sample = random.sample(self.memory, BATCH_SIZE) # list of tuples
+        else:
+            mini_sample = self.memory
 
-        states, actions, rewards, next_states, dones = zip (*mini_sample)
+        states, actions, rewards, next_states, dones = zip(*mini_sample)
         self.trainer.train_step(states, actions, rewards, next_states, dones)
         
 
@@ -130,7 +130,7 @@ def train () :
         agent.train_short_memory(state_old, final_move, reward, state_new, done)
 
         #we have to remember this
-        agent.rember(state_old, final_move, reward, state_new, done)
+        agent.remember(state_old, final_move, reward, state_new, done)
 
         if done :
             #train the long memory (experience) and show results

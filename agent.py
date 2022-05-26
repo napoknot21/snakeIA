@@ -4,6 +4,7 @@ import numpy as np
 
 from collections import deque
 from game import SnakeGameAI, Direction, Point
+from model import Linear_QNet, QTrainer
 
 #We define some const
 MAX_MEMORY = 100_100
@@ -15,11 +16,10 @@ class Agent :
     def __init__ (self) :
         self.n_games = 0
         self.epsilon = 0 #randomness
-        self.gama = 0 #discount rate
+        self.gamma = 0.9 #discount rate
         self.memory = deque(max_len=MAX_MEMORY) #popleft()
-        self.mode = None
-        self.traine = None
-        # TODO model, trainer
+        self.mode = Linear_QNet(11, 256, 3) #11 inputs and 3 outputs
+        self.traine = QTrainer(self.model, lr=LR, gamma=self.gamma)
 
     
     def get_state (self, game) :
@@ -54,7 +54,7 @@ class Agent :
             (dir_d and game.is_collision(point_r)) or
             (dir_u and game.is_collision(point_l)) or
             (dir_r and game.is_collision(point_u)) or
-            (dir_l and game.is_collision(point_d),
+            (dir_l and game.is_collision(point_d)),
 
             #move direction
             dir_l,
@@ -99,10 +99,10 @@ class Agent :
             final_move[move] = 1
         else :
             state0 = torch.tensor(state, dtype=torch.float)
-            prediction = self.model.predict(state0)
+            prediction = self.model(state0)
             move = torch.argmax(prediction).item()
             final_move[move] = 1
-            
+
         return final_move
 
 

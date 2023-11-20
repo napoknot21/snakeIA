@@ -1,8 +1,8 @@
 import importlib.util
 import sys, subprocess
 
-libraries = ['torch', 'torchvision', 'ipython', 'matplotlib', 'pygame']
-names = ['torch', 'torchvision', 'ipython', 'matplotlib', 'pygameIPython', 'matplotlib', 'pygame']
+libraries = ['torch', 'torchvision', 'IPython', 'matplotlib', 'pygame']
+names = ['torch', 'torchvision', 'IPython', 'matplotlib', 'pygame']
 
 print("Cheking for libraries and dependencies...")
 

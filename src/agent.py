@@ -3,9 +3,9 @@ import random
 import numpy as np
 
 from collections import deque
-from src.game import SnakeGameAI, Direction, Point
-from src.model import Linear_QNet, QTrainer
-from src.helper import plot
+from game import SnakeGameAI, Direction, Point
+from model import Linear_QNet, QTrainer
+from helper import plot
 
 #We define some const
 MAX_MEMORY = 100_100

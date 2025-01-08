@@ -1,12 +1,12 @@
 import sys, subprocess, os
 subprocess.check_call([sys.executable, 'extras/setup/setup.py'])
 
-import src.agent as ag
+from src.agent import train
 
 class Launcher :
 
     def __init__ (self) :
-        ag.Agent()
+        train()
 
 
 def main () :

@@ -1,8 +1,7 @@
 import sys, subprocess, os
 subprocess.check_call([sys.executable, 'extras/setup/setup.py'])
 
-sys.path.append(os.path.join(os.path.dirname(os.path.realpath(__file__)), ".", "src"))
-import agent as ag
+import src.agent as ag
 
 class Launcher :
 

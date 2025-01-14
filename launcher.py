@@ -17,7 +17,7 @@ class Launcher :
         print("1. Train a new AI (generate model_training.pth)")
         print("2. Use a pre-trained AI (model_trained.pth)")
         print("3. Play the classic snake game")
-        choice = input("Choose an option (1, 2, or 3): ").strip()
+        choice = input("\n[*] Choose an option (1, 2, or 3): ").strip()
 
         if choice == "1":
 

@@ -10,7 +10,9 @@ It's imperative to have ```python3```. Update your python version [here](https:/
 
 We need to install some external libraries like ```pygame```, ```pytorch``` for the game. So, depending your operanting system, there are different ways to install them
 
+
 ### Windows 
+
 Open a cmd, and enter the following command
 ```
 pip3 install pygame ipython matplotlib
@@ -31,41 +33,46 @@ pip3 install pygame torch torchvision matplotlib ipython
 ```
 
 ### Linux
+
 For **DEBIAN** based distribution :
 ```
-sudo apt-get install python-pygame
-```
-For **ARCH** based distros :
-```
-pip3 install pygame
+apt-get install python-pygame python-ipython libtorch-dev python3-matplotli
 ```
 
-Then, We install the rest of libraries
+For **ARCH** based distros :
 ```
-pip3 install torch torchvision matplotlib
+pacman -S python-pygame ipython python-pytorch matplotlib 
 ```
-## Snake Game AI
-First, we have to download the repo by
+
+For other linux distributions, check the official documentation of your OS.
+
+## Run the project
+
+First, clone the repository
 ```
 git clone https://github.com/napoknot21/snakeIA.git
 ```
 
-Then, we enter to the cloned directory
+Enter to the cloned directory
 ```
 cd snakeIA
 ```
 
-Finally, we run the ```agent.py``` file and enjoy the show !
-> The projetc is based on **python3**, so if you have other versions, update your python version !
+Finally, we run the ```launcher.py``` !
 ```
-python3 agent.py
-```
-
-## Game
-If you only want to get fun and game to snakegame, well there's a file for that ! so run
-```
-python3 snake_game.py
+python3 launcher.py
 ```
 
+3 options are available in this update
+```
+=== SNAKE AI LAUNCHER ===
+
+1. Train a new AI (generate model_training.pth)
+2. Use a pre-trained AI (model_trained.pth)
+3. Play the classic snake game
+
+Choose an option (1, 2, or 3):
+```
+> Choose the option you prefer !
 
 Made by Napoknot21 (C. M-A)
